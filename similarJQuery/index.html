@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件-模拟jQuery封装</title>
+</head>
+<body id="base">
+    <div class="base1">
+        <div class="base2">
+            <a id="aa" class="bb">#AA .bb</a>
+            <a>a2</a>
+            <a>a3</a>
+            <a id="bb">#bb</a>
+            <a class="bb">.bb2</a>
+            <a class="bb">.bb3</a>
+        </div>
+    </div>
+    <a class="cc">.cc</a>
+
+    <script src="SimilarJQuery.js"></script>
+    <script>
+        console.log($.findDOM(document.getElementsByTagName("body")[0], "#aa"));
+        console.log($.parentsDOM(document.getElementById("aa"), "div"));
+        console.log($.brotherDOM(document.getElementsByTagName("a")[1], "a"));
+    </script>
+</body>
+</html>
