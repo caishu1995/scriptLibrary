@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>aa</title>
+	<script>
+		var data = [{pagegroup:"首页",pageName:"关于学习",id:1},{pagegroup:"首页",pageName:"关于我们",id:2},{ pagegroup:"官网/技术学习",pageName: "123",id:3},{ pagegroup:"官网/其他",pageName: "",id:4}]
+		var result = [];
+		for(var i = 0; i < data.length; i++){
+			var _row = data[i].pagegroup;
+			var _name = data[i].pageName;
+			var _id = data[i].id;
+			search(_row, _name, _id, result);
+		}
+		console.log(result);
+
+		function search(_row, _name, _id, result){
+			var _base = (_row.split('/').length > 1) ? _row.split('/')[0]: _row;
+			for(var i = 0; i < result.length; i++){
+				if(result[i].name == _base){ //判断是否为指定范围
+					if(_base == _row) result[i].children.push({name: _name, id: _id}); //如果是指定路径，则追加当前元素
+					else search(_row.substring(_row.indexOf("/") + 1, _row.length), _name, _id, result[i].children); //如果是范围内元素，则递归寻找
+					return;
+				}
+			}
+
+			//如果没找到类似的元素
+			if(i == result.length) {
+				var list = _row.split('/');
+				var _children = {name: _name, id: _id};
+				for(var j = list.length-1; j >= 0; j--){
+					_children = {name: list[j], children: [_children]};
+				}
+				result.push(_children);
+			}
+		}
+	</script>
+</head>
+<body>
+
+</body>
+</html>
